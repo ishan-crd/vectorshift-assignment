@@ -4,6 +4,8 @@ A drag-and-drop pipeline builder built with React and FastAPI. Create node-based
 
 ![Build tab](https://img.shields.io/badge/stack-React%20%2B%20FastAPI-blue)
 
+**Live demo:** [vectorshift-eta.vercel.app](https://vectorshift-eta.vercel.app/)
+
 ## What's inside
 
 - **Frontend** — React + ReactFlow canvas with 9 node types, undo/redo, drag-and-drop (tap on mobile), and a demo pipeline loader
