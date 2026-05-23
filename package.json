@@ -1,0 +1,12 @@
+{
+  "name": "vectorshift",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n frontend,backend -c cyan,green \"pnpm --dir frontend start\" \"cd backend && uvicorn main:app --reload\"",
+    "dev:frontend": "pnpm --dir frontend start",
+    "dev:backend": "cd backend && uvicorn main:app --reload"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
