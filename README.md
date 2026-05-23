@@ -60,6 +60,12 @@ pnpm dev:backend    # just the FastAPI server
 | **Merge** | Combines two inputs into one |
 | **Filter** | Passes or rejects data based on a condition |
 
+## Mobile support
+
+The app is fully mobile responsive — works on phones and tablets out of the box. On touch devices, tap a node chip to add it to the canvas. See the screen recording below for a quick walkthrough.
+
+https://github.com/user-attachments/assets/placeholder
+
 ## Usage
 
 1. **Drag** nodes from the toolbar onto the canvas (or tap on mobile)
