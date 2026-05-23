@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
+import { NODE_TYPES } from './nodeConfig';
 
 const selector = (state) => ({
   nodes: state.nodes,
@@ -38,11 +39,13 @@ export const SubmitBar = () => {
       showToast('Validation failed', 'Pipeline is empty');
       return;
     }
-    // check that every node with inputs has at least one edge connected
+    // check that every node whose config defines inputs has at least one edge connected
     const targetIds = new Set(edges.map((e) => e.target));
-    const unconnected = nodes.filter(
-      (n) => n.type !== 'customInput' && n.type !== 'note' && n.type !== 'timer' && !targetIds.has(n.id)
-    );
+    const unconnected = nodes.filter((n) => {
+      const config = NODE_TYPES[n.type];
+      if (!config || config.inputs.length === 0) return false;
+      return !targetIds.has(n.id);
+    });
     if (unconnected.length > 0) {
       showToast('Validation warning', `${unconnected.length} node(s) have no input connections`);
     } else {
