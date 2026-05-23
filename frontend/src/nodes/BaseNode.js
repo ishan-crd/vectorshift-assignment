@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Handle, Position } from 'reactflow';
 import { NODE_TYPES } from '../nodeConfig';
+import { Select } from '../components/Select';
 
 function Field({ field, value, onChange }) {
   return (
@@ -24,11 +25,11 @@ function Field({ field, value, onChange }) {
         />
       )}
       {field.type === 'select' && (
-        <select value={value ?? ''} onChange={(e) => onChange(field.key, e.target.value)}>
-          {field.options.map((o) => (
-            <option key={o} value={o}>{o}</option>
-          ))}
-        </select>
+        <Select
+          value={value ?? ''}
+          options={field.options}
+          onChange={(v) => onChange(field.key, v)}
+        />
       )}
       {field.type === 'textarea' && (
         <textarea
