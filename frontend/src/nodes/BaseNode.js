@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Handle, Position } from 'reactflow';
 import { NODE_TYPES } from '../nodeConfig';
 import { Select } from '../components/Select';
+import { ContextMenu } from '../components/ContextMenu';
+import { useStore } from '../store';
 
 function Field({ field, value, onChange }) {
   return (
@@ -42,7 +44,6 @@ function Field({ field, value, onChange }) {
   );
 }
 
-// Renders a full node card from config. Used by all node types except Text (which extends this).
 export function BaseNode({ id, config, data, inputs: inputsOverride, children }) {
   const [fields, setFields] = useState(() => {
     const init = {};
@@ -51,25 +52,43 @@ export function BaseNode({ id, config, data, inputs: inputsOverride, children })
     });
     return init;
   });
+  const [ctxMenu, setCtxMenu] = useState(null);
+
+  const deleteNode = useStore((s) => s.deleteNode);
+  const duplicateNode = useStore((s) => s.duplicateNode);
 
   const handleFieldChange = (key, value) => {
     setFields((prev) => ({ ...prev, [key]: value }));
   };
 
+  const onContextMenu = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCtxMenu({ x: e.clientX, y: e.clientY });
+  }, []);
+
   const inputs = inputsOverride || config.inputs;
   const outputs = config.outputs;
   const isNote = config.kind === 'STICKY';
 
+  const menuItems = [
+    { key: 'duplicate', label: 'Duplicate', shortcut: '\u2318D', icon: '\u29C9', action: () => duplicateNode(id) },
+    { key: 'sep1', separator: true },
+    { key: 'delete', label: 'Delete', shortcut: '\u232B', icon: '\u2715', danger: true, action: () => deleteNode(id) },
+  ];
+
   return (
-    <div className={`node ${isNote ? 'note' : ''}`} data-cat={config.cat}>
-      {/* header */}
+    <div
+      className={`node ${isNote ? 'note' : ''}`}
+      data-cat={config.cat}
+      onContextMenu={onContextMenu}
+    >
       <div className="node-header">
         <span className="node-cat" />
         <span className="node-title">{config.label}</span>
         <span className="node-kind">{config.kind}</span>
       </div>
 
-      {/* body */}
       <div className="node-body">
         {children || config.fields.map((f) => (
           <Field
@@ -88,7 +107,6 @@ export function BaseNode({ id, config, data, inputs: inputsOverride, children })
         )}
       </div>
 
-      {/* input handles */}
       {inputs.map((h, i) => (
         <Handle
           key={h.id}
@@ -102,7 +120,6 @@ export function BaseNode({ id, config, data, inputs: inputsOverride, children })
         </Handle>
       ))}
 
-      {/* output handles */}
       {outputs.map((h, i) => (
         <Handle
           key={h.id}
@@ -115,11 +132,19 @@ export function BaseNode({ id, config, data, inputs: inputsOverride, children })
           <span className="handle-label-right">{h.label}</span>
         </Handle>
       ))}
+
+      {ctxMenu && (
+        <ContextMenu
+          x={ctxMenu.x}
+          y={ctxMenu.y}
+          items={menuItems}
+          onClose={() => setCtxMenu(null)}
+        />
+      )}
     </div>
   );
 }
 
-// Factory to create a node component from a config key
 export function createNode(typeKey) {
   const config = NODE_TYPES[typeKey];
   const NodeComponent = ({ id, data }) => (

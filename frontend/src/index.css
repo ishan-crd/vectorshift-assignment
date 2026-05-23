@@ -170,6 +170,62 @@ input, select, textarea { font-family: inherit; color: inherit; }
   box-shadow: var(--shadow-md);
 }
 
+/* ---------- context menu ---------- */
+.ctx-menu {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  padding: 4px;
+  min-width: 170px;
+  animation: dropdown-in .1s ease;
+}
+.ctx-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 12.5px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background .08s ease;
+  text-align: left;
+}
+.ctx-item:hover {
+  background: var(--accent-soft);
+}
+.ctx-item.danger {
+  color: oklch(0.55 0.2 25);
+}
+.ctx-item.danger:hover {
+  background: oklch(0.96 0.03 25);
+}
+.ctx-icon {
+  width: 16px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.ctx-item.danger .ctx-icon {
+  color: oklch(0.55 0.2 25);
+}
+.ctx-shortcut {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--subtle);
+}
+.ctx-sep {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 8px;
+}
+
 /* ---------- confirm modal ---------- */
 .modal-overlay {
   position: fixed;

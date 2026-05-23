@@ -153,6 +153,33 @@ export const useStore = create((set, get) => ({
     });
   },
 
+  deleteNode: (nodeId) => {
+    pushHistory(get, set);
+    set({
+      nodes: get().nodes.filter((n) => n.id !== nodeId),
+      edges: get().edges.filter((e) => e.source !== nodeId && e.target !== nodeId),
+    });
+  },
+
+  duplicateNode: (nodeId) => {
+    const src = get().nodes.find((n) => n.id === nodeId);
+    if (!src) return;
+    pushHistory(get, set);
+    const newIDs = { ...get().nodeIDs };
+    if (newIDs[src.type] === undefined) newIDs[src.type] = 0;
+    newIDs[src.type] += 1;
+    const newId = `${src.type}-${newIDs[src.type]}`;
+    set({
+      nodeIDs: newIDs,
+      nodes: [...get().nodes, {
+        ...src,
+        id: newId,
+        position: { x: src.position.x + 30, y: src.position.y + 30 },
+        data: { ...src.data, id: newId },
+      }],
+    });
+  },
+
   updateNodeField: (nodeId, fieldName, fieldValue) => {
     set({
       nodes: get().nodes.map((node) => {
