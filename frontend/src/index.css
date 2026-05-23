@@ -920,7 +920,7 @@ input, select, textarea { font-family: inherit; color: inherit; }
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.25));
 }
 .tut-cursor-drag {
-  top: 6px; left: 20px;
+  top: 6px; left: 65px;
   animation: tut-cursor-move 2.5s ease-in-out infinite;
 }
 @keyframes tut-cursor-move {

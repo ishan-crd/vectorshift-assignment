@@ -40,8 +40,8 @@ function StepIllustration({ animation }) {
         {animation === 'drag' && (
           <>
             <div className="tut-toolbar-mini">
-              <div className="tut-chip-mini tut-chip-source">Input</div>
               <div className="tut-chip-mini">LLM</div>
+              <div className="tut-chip-mini tut-chip-source">Input</div>
               <div className="tut-chip-mini">Text</div>
               <img src={process.env.PUBLIC_URL + '/cursor.svg'} alt="" className="tut-cursor tut-cursor-drag" />
             </div>
