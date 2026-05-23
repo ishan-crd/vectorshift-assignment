@@ -10,13 +10,14 @@ const selector = (s) => ({
   undo: s.undo,
   redo: s.redo,
   clearAll: s.clearAll,
+  loadDemo: s.loadDemo,
   canUndo: s.past.length > 0,
   canRedo: s.future.length > 0,
   nodeCount: s.nodes.length,
 });
 
 function App() {
-  const { undo, redo, clearAll, canUndo, canRedo, nodeCount } = useStore(selector, shallow);
+  const { undo, redo, clearAll, loadDemo, canUndo, canRedo, nodeCount } = useStore(selector, shallow);
   const [showClear, setShowClear] = useState(false);
 
   // keyboard shortcuts
@@ -65,6 +66,12 @@ function App() {
               </svg>
             </button>
             <span className="topbar-sep" />
+            <button className="demo-btn" title="Load demo pipeline" onClick={loadDemo}>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M5 3l8 5-8 5V3z" fill="currentColor" stroke="none" />
+              </svg>
+              Demo
+            </button>
             <button
               className="icon-btn"
               title="Clear canvas"
