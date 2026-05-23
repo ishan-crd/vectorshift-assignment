@@ -343,10 +343,10 @@ input, select, textarea { font-family: inherit; color: inherit; }
   transform: translateY(-50%);
 }
 .handle-label-left {
-  left: calc(100% + 8px);
+  right: calc(100% + 8px);
 }
 .handle-label-right {
-  right: calc(100% + 8px);
+  left: calc(100% + 8px);
 }
 
 /* ---------- edges ---------- */
@@ -396,6 +396,7 @@ input, select, textarea { font-family: inherit; color: inherit; }
   box-shadow: none !important;
   background: none !important;
   font-size: inherit !important;
+  overflow: visible !important;
 }
 
 /* ---------- submit bar ---------- */
@@ -416,6 +417,11 @@ input, select, textarea { font-family: inherit; color: inherit; }
   color: var(--muted);
 }
 .submit-meta .stat strong { color: var(--text); font-weight: 600; }
+.submit-actions {
+  position: absolute;
+  right: 0;
+  display: flex; gap: 8px;
+}
 
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
