@@ -3,6 +3,7 @@ import { PipelineToolbar } from './toolbar';
 import { PipelineUI } from './ui';
 import { SubmitBar } from './submit';
 import { ConfirmModal } from './components/ConfirmModal';
+import { TutorialModal } from './components/TutorialModal';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 
@@ -19,6 +20,7 @@ const selector = (s) => ({
 function App() {
   const { undo, redo, clearAll, loadDemo, canUndo, canRedo, nodeCount } = useStore(selector, shallow);
   const [showClear, setShowClear] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   // keyboard shortcuts
   useEffect(() => {
@@ -51,6 +53,13 @@ function App() {
           <button>Logs</button>
         </div>
         <div className="topbar-right">
+          <button className="tut-btn" title="Tutorial" onClick={() => setShowTutorial(true)}>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="8" cy="8" r="6.5" />
+              <path d="M6 6.5a2 2 0 0 1 3.94.5c0 1-1.44 1.25-1.44 2.25" strokeLinecap="round" />
+              <circle cx="8.5" cy="11.5" r="0.5" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
           <span className="pill"><span className="dot" /> autosaved</span>
           <div className="topbar-actions">
             <button className="icon-btn" title="Undo (⌘Z)" disabled={!canUndo} onClick={undo}>
@@ -88,6 +97,10 @@ function App() {
       <PipelineToolbar />
       <PipelineUI />
       <SubmitBar />
+
+      {showTutorial && (
+        <TutorialModal onClose={() => setShowTutorial(false)} />
+      )}
 
       {showClear && (
         <ConfirmModal
