@@ -55,7 +55,6 @@ export function BaseNode({ id, config, data, inputs: inputsOverride, children })
   const [ctxMenu, setCtxMenu] = useState(null);
 
   const deleteNode = useStore((s) => s.deleteNode);
-  const duplicateNode = useStore((s) => s.duplicateNode);
 
   const handleFieldChange = (key, value) => {
     setFields((prev) => ({ ...prev, [key]: value }));
@@ -72,8 +71,6 @@ export function BaseNode({ id, config, data, inputs: inputsOverride, children })
   const isNote = config.kind === 'STICKY';
 
   const menuItems = [
-    { key: 'duplicate', label: 'Duplicate', shortcut: '\u2318D', icon: '\u29C9', action: () => duplicateNode(id) },
-    { key: 'sep1', separator: true },
     { key: 'delete', label: 'Delete', shortcut: '\u232B', icon: '\u2715', danger: true, action: () => deleteNode(id) },
   ];
 

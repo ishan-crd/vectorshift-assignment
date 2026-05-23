@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 export function ContextMenu({ x, y, items, onClose }) {
   const ref = useRef(null);
@@ -11,16 +12,12 @@ export function ContextMenu({ x, y, items, onClose }) {
     return () => document.removeEventListener('pointerdown', handler);
   }, [onClose]);
 
-  // keep menu within viewport
-  const style = {
-    position: 'fixed',
-    left: x,
-    top: y,
-    zIndex: 200,
-  };
-
-  return (
-    <div className="ctx-menu" ref={ref} style={style}>
+  return createPortal(
+    <div
+      className="ctx-menu"
+      ref={ref}
+      style={{ position: 'fixed', left: x, top: y, zIndex: 200 }}
+    >
       {items.map((item) =>
         item.separator ? (
           <div key={item.key} className="ctx-sep" />
@@ -36,6 +33,7 @@ export function ContextMenu({ x, y, items, onClose }) {
           </button>
         )
       )}
-    </div>
+    </div>,
+    document.body
   );
 }
