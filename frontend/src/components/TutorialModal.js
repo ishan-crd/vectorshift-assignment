@@ -46,7 +46,7 @@ function StepIllustration({ animation }) {
             </div>
             <div className="tut-canvas-mini">
               <div className="tut-ghost-node">Input</div>
-              <div className="tut-cursor tut-cursor-drag" />
+              <img src={process.env.PUBLIC_URL + '/cursor.svg'} alt="" className="tut-cursor tut-cursor-drag" />
             </div>
           </>
         )}
@@ -106,7 +106,7 @@ function StepIllustration({ animation }) {
             <div className="tut-ctx-menu-mini">
               <div className="tut-ctx-item-mini danger">{'\u2715'} Delete</div>
             </div>
-            <div className="tut-cursor tut-cursor-ctx" />
+            <img src={process.env.PUBLIC_URL + '/cursor.svg'} alt="" className="tut-cursor tut-cursor-ctx" />
           </div>
         )}
         {animation === 'submit' && (
