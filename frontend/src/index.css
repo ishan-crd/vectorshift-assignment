@@ -1215,7 +1215,18 @@ input, select, textarea { font-family: inherit; color: inherit; }
   .tut-nav .btn.primary { padding: 7px 14px; font-size: 12px; }
 
   /* toast */
-  .toast { font-size: 12px; padding: 10px 14px; bottom: 16px; max-width: calc(100vw - 32px); }
+  .toast {
+    font-size: 12px;
+    padding: 10px 14px;
+    bottom: 16px;
+    max-width: calc(100vw - 32px);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    gap: 8px;
+  }
+  .toast .ok { width: 16px; height: 16px; font-size: 10px; flex-shrink: 0; }
+  .toast .stats { font-size: 10px; margin-left: 4px; padding-left: 8px; }
 
   /* context menu */
   .ctx-menu { min-width: 150px; }
@@ -1244,4 +1255,7 @@ input, select, textarea { font-family: inherit; color: inherit; }
   .tut-edge-line { width: 60px; }
   .tut-edit-card { width: 160px; }
   .tut-var-card { width: 180px; }
+
+  .toast { font-size: 11px; padding: 8px 10px; gap: 6px; }
+  .toast .stats { font-size: 9px; padding-left: 6px; margin-left: 2px; }
 }
