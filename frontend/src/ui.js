@@ -70,7 +70,7 @@ export const PipelineUI = () => {
         });
       }
     },
-    [reactFlowInstance]
+    [reactFlowInstance, getNodeID, addNode]
   );
 
   const onDragOver = useCallback((event) => {

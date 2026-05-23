@@ -10,7 +10,7 @@ const MAX_HISTORY = 50;
 
 // saves a snapshot before state-changing actions
 function pushHistory(get, set) {
-  const { nodes, edges, past, future } = get();
+  const { nodes, edges, past } = get();
   set({
     past: [...past.slice(-(MAX_HISTORY - 1)), { nodes, edges }],
     future: [],
