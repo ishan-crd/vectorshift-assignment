@@ -1,6 +1,12 @@
+
+
 # Vector — Pipeline Builder
 
 A drag-and-drop pipeline builder built with React and FastAPI. Create node-based workflows by connecting inputs, LLMs, text templates, filters, and more on an interactive canvas.
+
+
+https://github.com/user-attachments/assets/50a17bb6-919f-4527-8697-d8f20449c4e1
+
 
 ![Build tab](https://img.shields.io/badge/stack-React%20%2B%20FastAPI-blue)
 
